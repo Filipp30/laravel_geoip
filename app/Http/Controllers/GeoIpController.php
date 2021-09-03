@@ -18,7 +18,9 @@ class GeoIpController extends Controller{
             "info2"=>json_encode($request->query),
             "info3"=>json_encode($request->query('data')),
             "info4"=>json_encode($request->get('data')),
-            "info6"=>$request['data']
+            "info7"=>$request->query('data'),
+            "info6"=>$request['data'],
+            "info8"=>$request->get('data')
         ]);
     }
 
