@@ -10,7 +10,8 @@ class GeoIpController extends Controller{
         logs()->info($request);
         logs()->info('Call run GeoIp...');
         return response([
-            "message"=>'geo_ip_call'
+            "message"=>'geo_ip_call',
+            "request"=>$request
         ]);
     }
 
