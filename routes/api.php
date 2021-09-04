@@ -6,10 +6,12 @@ use Illuminate\Support\Facades\Route;
 Route::get('/ip/run/{ip}',function ($ip){
 
     $get = new IpController();
-    $country = $get->get_location($ip);
+    $data = $get->get_location($ip);
 
     return response([
         "ip"=>$ip,
-        "country"=>$country
+        "country"=>$data['country'],
+        "city"=>$data['city'],
+//        'insights'=> $data['insights']
     ],201);
 });
