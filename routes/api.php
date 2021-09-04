@@ -1,10 +1,16 @@
 <?php
 
+use App\Http\Controllers\IpController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/ip/run/{ip}',function ($ip){
+
+    $get = new IpController();
+    $country = $get->get_location($ip);
+
     return response([
-        "message"=>'run_ip_call',
         "ip"=>$ip,
+        "country"=>$country
+
     ],201);
 });
