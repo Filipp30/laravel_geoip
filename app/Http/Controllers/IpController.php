@@ -14,7 +14,7 @@ class IpController extends Controller{
     }
 
     public function get_location($ip){
-        $client = new Client(602468, 'ZDNBj5rMwDkyRToT');
+        $client = new Client(602468, 'iaRImnahWwvDxuYn', ['en'], ['host' => 'geolite.info']);
         return $country = $client->country($ip);
     }
 }

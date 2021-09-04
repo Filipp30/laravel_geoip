@@ -11,6 +11,5 @@ Route::get('/ip/run/{ip}',function ($ip){
     return response([
         "ip"=>$ip,
         "country"=>$country
-
     ],201);
 });
