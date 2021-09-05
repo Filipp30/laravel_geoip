@@ -1,17 +1,15 @@
 <?php
 
-use App\Http\Controllers\IpController;
+
+use App\Http\Controllers\GeoIp2\GeoIp2Controller;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/ip/run/{ip}',function ($ip){
 
-    $get = new IpController();
+    $get = new GeoIp2Controller();
     $data = $get->get_location($ip);
 
     return response([
-        "ip"=>$ip,
-        "country"=>$data['country'],
-        "city"=>$data['city'],
-//        'insights'=> $data['insights']
+        "geo_ip2"=>$data
     ],201);
 });
