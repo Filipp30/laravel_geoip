@@ -1,6 +1,5 @@
 <?php
 
-
 use App\Http\Controllers\GeoIp2\GeoIp2Controller;
 use Illuminate\Support\Facades\Route;
 
