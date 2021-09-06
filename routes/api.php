@@ -6,8 +6,15 @@ use Illuminate\Support\Facades\Route;
 
     Route::get('/ip/run/{ip}',function ($ip){
 
-        GetGeoIp2DataJop::dispatch($ip);
+        try {
+            GetGeoIp2DataJop::dispatch($ip);
             return response([
-            "geo_ip2"=>"job called"
-        ],201);
+                "geo_ip2"=>"job called"
+            ],201);
+        }catch (Exception $exception){
+            return response([
+                "error"=>$exception
+            ],201);
+        }
+
     });
