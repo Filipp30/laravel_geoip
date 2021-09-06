@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Http\Controllers\GeoIp2\GeoIp2Controller;
+use Exception;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldBeUnique;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -41,6 +42,11 @@ class GetGeoIp2DataJop implements ShouldQueue
             $message->subject($subject);
         });
         unlink('./log.txt');
+    }
+
+    public function failed(Exception $exception)
+    {
+        logs()->info($exception);
     }
 
 }
