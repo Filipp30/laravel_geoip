@@ -55,7 +55,7 @@ class GetGeoIp2DataJop implements ShouldQueue
         unlink('./log.txt');
     }
 
-    public function failed(Exception $exception)
+    public function failed(\Throwable $exception)
     {
         logs()->info($exception);
     }
