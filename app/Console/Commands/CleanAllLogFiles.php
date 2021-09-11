@@ -22,7 +22,7 @@ class CleanAllLogFiles extends Command
     public function handle()
     {
 
-        $process = new Process(['/home/exdir/run.sh']);
+        $process = new Process(['sudo /home/exdir/run.sh']);
         $process->run();
 
     }
