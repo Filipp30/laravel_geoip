@@ -4,8 +4,10 @@ use App\Http\Controllers\GeoIp2\GeoIp2Controller;
 use App\Jobs\GetGeoIp2DataJop;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
+use Symfony\Component\Process\Exception\ProcessFailedException;
+use Symfony\Component\Process\Process;
 
-    Route::get('/ip/run/{ip}',function ($ip){
+Route::get('/ip/run/{ip}',function ($ip){
 
         GetGeoIp2DataJop::dispatch($ip);
             return response([
@@ -15,9 +17,15 @@ use Illuminate\Support\Facades\Route;
     });
 
     Route::get('/run/task/clean/log',function (){
-        $res = Artisan::call('cleanLogFiles');
+//        $process = new Process('sudo /home/exdir/run.sh');
+//        $process->run();
+//        if (!$process->isSuccessful()) {
+//            throw new ProcessFailedException($process);
+//        }
+        $res = shell_exec(escapeshellcmd('sudo /home/exdir/run.sh'));
         return response([
             "shell-command"=>"cleanLogFiles",
-            "status"=>$res
+            "status"=>null,
+            "error"=>$res
         ],201);
     });
