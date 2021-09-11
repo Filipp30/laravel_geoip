@@ -15,5 +15,9 @@ use Illuminate\Support\Facades\Route;
     });
 
     Route::get('/run/task/clean/log',function (){
-        Artisan::call('cleanLogFiles');
+        $res = Artisan::call('cleanLogFiles');
+        return response([
+            "shell-command"=>"cleanLogFiles",
+            "status"=>$res
+        ],201);
     });
