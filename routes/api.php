@@ -17,17 +17,16 @@ Route::get('/ip/run/{ip}',function ($ip){
     });
 
     Route::get('/run/task/clean/log',function (){
-//        $process = new Process(['sudo /home/exdir/run.sh']);
-//        $process->run();
-        $process_2 = Process::fromShellCommandline('sudo /home/exdir/run.sh');
+        $process = new Process(['sudo /home/exdir/run.sh']);
+        $process->run();
 
-//        if (!$process->isSuccessful()) {
-//            throw new ProcessFailedException($process);
-//        }
+        if (!$process->isSuccessful()) {
+            throw new ProcessFailedException($process);
+        }
         return response([
             "shell-command"=>"cleanLogFiles",
-//            "status"=>$process->getOutput(),
-//            "error"=>$process,
-            "process_2"=>$process_2
+            "status"=>$process->getOutput(),
+            "error"=>$process,
+
         ],201);
     });
