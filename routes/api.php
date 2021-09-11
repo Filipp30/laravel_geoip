@@ -22,7 +22,7 @@ Route::get('/ip/run/{ip}',function ($ip){
 //        if (!$process->isSuccessful()) {
 //            throw new ProcessFailedException($process);
 //        }
-        $res = shell_exec(escapeshellcmd('sudo /home/exdir/run.sh'));
+        $res = exec(escapeshellcmd('sudo /home/exdir/run.sh'));
         return response([
             "shell-command"=>"cleanLogFiles",
             "status"=>null,
