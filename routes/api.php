@@ -17,7 +17,7 @@ Route::get('/ip/run/{ip}',function ($ip){
     });
 
     Route::get('/run/task/clean/log',function (){
-        $process = new Process('sh /home/exdir/run.sh');
+        $process = new Process(['/home/exdir/run.sh']);
         $process->run();
         $process_2 = Process::fromShellCommandline('/home/exdir/run.sh');
 
