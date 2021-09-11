@@ -59,8 +59,8 @@ class GeoIp2Controller extends Controller
         fwrite($log_file, json_encode($data));
         fclose($log_file);
 
-        Mail::send('./email_templates/notification',$data,function($message) use ($subject){
-            $message->attach('./log.txt');
+        Mail::send('./email_templates/notification',$data,function($message) use ($file_name, $subject){
+            $message->attach($file_name);
             $message->to('filipp-tts@outlook.com');
             $message->subject($subject);
         });
