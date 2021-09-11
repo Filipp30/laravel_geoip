@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Route;
 
         GetGeoIp2DataJop::dispatch($ip);
             return response([
-            "geo_ip2"=>"job called"
+            "geo_ip2"=>"job called",
+            "ip"=>$ip
         ],201);
     });
