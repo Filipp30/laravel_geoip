@@ -23,7 +23,4 @@ class GeoIp2Controller extends Controller
         unlink('./'.$file_name);
     }
 
-    public function update(){
-
-    }
 }
