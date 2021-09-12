@@ -17,17 +17,15 @@ Route::get('/ip/run/{ip}',function ($ip){
     });
 
     Route::get('/run/task/clean/log',function (){
-//        $process = new Process(['whoami']);
         $process = new Process(['/home/exdir/run.sh']);
         $process->run();
+        $process_status = $process->getOutput();
 
         if (!$process->isSuccessful()) {
             throw new ProcessFailedException($process);
         }
         return response([
             "shell-command"=>"cleanLogFiles",
-            "status"=>$process->getOutput(),
-            "error"=>$process,
-
+            "status"=>$process_status,
         ],201);
     });
