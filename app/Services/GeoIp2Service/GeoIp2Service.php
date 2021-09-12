@@ -12,7 +12,7 @@ class GeoIp2Service implements GeoLocationContract {
     public function get_location($ip): array
     {
         try {
-            $client = new Client(config('geo_ip_2.accountId'), config('geo_ip_2.licenseKey'), ['en'], ['host' => 'geolite.info']);
+            $client = new Client(config('services.geo_ip_2.accountId'), config('services.geo_ip_2.licenseKey'), ['en'], ['host' => 'geolite.info']);
             $country = $client->country($ip);
             $city = $client->city($ip);
             return [
