@@ -26,9 +26,8 @@ class GetGeoIp2DataJop implements ShouldQueue
 
     public function handle(GeoIp2Controller $geoIp2Controller)
     {
-        $geo_location_service = app(GeoLocationContract::class);
-        $geo_location_data = $geo_location_service->get_location($this->ip);
-        $geoIp2Controller->send_to_admin($geo_location_data);
+        $data = app(GeoLocationContract::class)->get_location($this->ip);
+        $geoIp2Controller->send_to_admin($data);
 
     }
 
