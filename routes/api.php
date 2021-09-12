@@ -18,7 +18,7 @@ Route::get('/ip/run/{ip}',function ($ip){
 
     Route::get('/run/task/clean/log',function (){
 //        $process = new Process(['who']);
-        $process = new Process(['sudo','/home/exdir/run.sh']);
+        $process = new Process(['/home/exdir/run.sh']);
         $process->run();
 
         if (!$process->isSuccessful()) {
