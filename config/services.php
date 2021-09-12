@@ -29,5 +29,9 @@ return [
         'secret' => env('AWS_SECRET_ACCESS_KEY'),
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
+    'geo_ip_2' => [
+        'accountId'=>env('GEOIP2_ACCOUNT_ID'),
+        'licenseKey'=>env('GEOIP2_LICENSE_KEY')
+    ]
 
 ];

@@ -5,7 +5,6 @@ namespace App\Services\GeoIp2Service;
 
 use App\Services\Contracts\GeoLocationContract;
 use GeoIp2\WebService\Client;
-use Illuminate\Support\Facades\Mail;
 use Throwable;
 
 class GeoIp2Service implements GeoLocationContract {
@@ -13,7 +12,7 @@ class GeoIp2Service implements GeoLocationContract {
     public function get_location($ip): array
     {
         try {
-            $client = new Client(602468, 'iaRImnahWwvDxuYn', ['en'], ['host' => 'geolite.info']);
+            $client = new Client(config('services.geo_ip_2.accountId'), config('services.geo_ip_2.licenseKey'), ['en'], ['host' => 'geolite.info']);
             $country = $client->country($ip);
             $city = $client->city($ip);
             return [
