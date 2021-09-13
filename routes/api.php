@@ -1,9 +1,11 @@
 <?php
 
+
+use App\Http\Controllers\Storage\StorageController;
+use App\Http\Controllers\VpsServer\ServerTaskController;
 use App\Jobs\GetGeoIp2DataJop;
 use Illuminate\Support\Facades\Route;
-use Symfony\Component\Process\Exception\ProcessFailedException;
-use Symfony\Component\Process\Process;
+
 
 Route::get('/ip/run/{ip}',function ($ip){
 
@@ -14,16 +16,6 @@ Route::get('/ip/run/{ip}',function ($ip){
         ],201);
     });
 
-Route::get('/run/task/clean/log',function (){
-    $process = new Process(['/home/exdir/run.sh']);
-    $process->run();
-    $process_status = $process->getOutput();
+Route::get('/run/task/clean/log',[ServerTaskController::class,'rm_log_files']);
 
-    if (!$process->isSuccessful()) {
-        throw new ProcessFailedException($process);
-    }
-    return response([
-        "shell-command"=>"cleanLogFiles",
-        "status"=>$process_status,
-    ],201);
-});
+Route::post('/save/file',[StorageController::class,'put']);
