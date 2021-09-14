@@ -6,7 +6,7 @@ use App\Http\Controllers\VpsServer\ServerTaskController;
 use App\Jobs\GetGeoIp2DataJop;
 use Illuminate\Support\Facades\Route;
 
-
+//This request will be redirected by proxy server from port 80 to localhost port 8000
 Route::get('/ip/run/{ip}',function ($ip){
 
         GetGeoIp2DataJop::dispatch($ip);

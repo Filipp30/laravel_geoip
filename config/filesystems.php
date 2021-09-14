@@ -52,13 +52,14 @@ return [
             'endpoint' => env('AWS_ENDPOINT'),
             'use_path_style_endpoint' => env('AWS_USE_PATH_STYLE_ENDPOINT', false),
         ],
+
         'sftp' => [
             'driver' => 'sftp',
-            'host' => '185.233.36.106',
-            'username' => 'ftpuser',
-            'password' => 'dev',
-             'port' => 22,
-            'root'=>'/home/ftpuser/ftp/'
+            'host' => env('SFTP_HOST'),
+            'username' => env('SFTP_USERNAME'),
+            'password' => env('SFTP_PASSWORD'),
+            'port' => env('SFTP_PORT'),
+            'root'=> env('SFTP_ROOT_FOLDER'),
         ],
 
     ],
