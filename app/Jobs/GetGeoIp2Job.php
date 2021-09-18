@@ -3,14 +3,16 @@
 namespace App\Jobs;
 
 use App\Http\Controllers\GeoIp2\GeoIp2Controller;
-use App\Services\Contracts\GeoLocationContract;
+use App\Models\AdminUsers;
+use App\Notifications\GeoIp2Notifications\GeoIpJobFailedNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use Throwable;
 
-class GetGeoIp2DataJop implements ShouldQueue
+class GetGeoIp2Job implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
@@ -20,9 +22,12 @@ class GetGeoIp2DataJop implements ShouldQueue
         $this->ip = $ip;
     }
 
-    public function handle(GeoIp2Controller $geoIp2Controller){
-        $data = app(GeoLocationContract::class)->get_location($this->ip);
-        $geoIp2Controller->send_to_admin($data);
+    public function handle( GeoIp2Controller $geoIp2Controller){
+        $geoIp2Controller->handle($this->ip);
     }
 
+    public function failed(Throwable $exception){
+        $user = AdminUsers::query()->findOrFail(1);
+        $user->notify(new GeoIpJobFailedNotification($exception));
+    }
 }
