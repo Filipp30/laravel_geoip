@@ -24,7 +24,7 @@ class ServerTaskController extends Controller
     }
 
     public function ping_ip($ip){
-        $ping_result = exec('/home/exdir/ping -c1 '.$ip,$outcome,$status);
+        $ping_result = exec('ping -c1 '.$ip,$outcome,$status);
         return response([
             'ping_result'=>$ping_result,
             'outcome'=>$outcome,
