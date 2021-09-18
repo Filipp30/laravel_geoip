@@ -3,24 +3,33 @@
 namespace App\Http\Controllers\GeoIp2;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Mail;
+use App\Models\AdminUsers;
+use App\Notifications\GeoIp2Notifications\GeoIpJobProcessedNotification;
+use App\Services\Contracts\GeoLocationContract;
 
-class GeoIp2Controller extends Controller
-{
-    public function send_to_admin($data){
-        $subject = "ip_data notification on : ";
+class GeoIp2Controller extends Controller{
+
+    public function handle($ip){
+        $data = $this->getData($ip);
+        $attach_file = $this->createFile($data);
+        $this->notifyAdmin($attach_file);
+        unlink('./'.$attach_file);
+    }
+
+    public function getData($ip){
+        return app(GeoLocationContract::class)->get_location($ip);
+    }
+
+    public function createFile($data){
         $file_name = 'log_time_'.time().'.txt';
         $log_file = fopen($file_name,'w');
         fwrite($log_file, json_encode($data));
         fclose($log_file);
+        return $file_name;
+    }
 
-        Mail::send('./email_templates/notification',$data,function($message) use ($file_name, $subject){
-            $message->attach($file_name);
-            $message->to('filipp-tts@outlook.com');
-            $message->subject($subject);
-        });
-        unlink('./'.$file_name);
+    public function notifyAdmin($attach_file){
+        return AdminUsers::query()->findOrFail(1)->notify(new GeoIpJobProcessedNotification($attach_file));
     }
 
 }

@@ -1,20 +1,20 @@
 <?php
 
-
 use App\Http\Controllers\Storage\StorageController;
 use App\Http\Controllers\VpsServer\ServerTaskController;
 use App\Jobs\GetGeoIp2DataJop;
+use App\Jobs\GetGeoIp2Job;
 use Illuminate\Support\Facades\Route;
 
 //NGINX:This request will be redirected by proxy server from port 80 to localhost port 8000
 Route::get('/ip/run/{ip}',function ($ip){
-        GetGeoIp2DataJop::dispatch($ip);
-        return response(["ip"=>$ip],201);
+       GetGeoIp2Job::dispatch($ip);
+       return response(["ip"=>$ip],201);
 });
 
 
 
-//SFTP: Storage Routes
+//SFTP: Storage Routes # SFTP server created on the VPS server
 Route::post('/save/file',[StorageController::class,'put']);
 
 Route::get('/exists/{dir}/{file_name}',function($dir,$file_name,StorageController $storage){
@@ -28,5 +28,6 @@ Route::delete('/delete/{dir}/{file_name}',function ($dir,$file_name,StorageContr
 });
 
 
-//VPS-server: Run terminal tasks from bash script
+//VPS-server: Run bash script #home/exdir/run.sh  on the server
 Route::get('/run/task/clean/log',[ServerTaskController::class,'rm_log_files']);
+
