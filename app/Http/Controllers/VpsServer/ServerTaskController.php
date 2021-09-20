@@ -10,7 +10,7 @@ use Symfony\Component\Process\Process;
 class ServerTaskController extends Controller
 {
     public function rm_log(){
-        $process = new Process(['/home/exdir/run.sh']);
+        $process = new Process(['/home/exedir/run.sh']);
         $process->run();
         $process_status = $process->getOutput();
 
