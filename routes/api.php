@@ -28,7 +28,7 @@ Route::delete('/delete/{dir}/{file_name}',function ($dir,$file_name,StorageContr
 });
 
 
-//VPS-server: Run bash script #home/exdir/run.sh  on the server
+//VPS-server: Run bash script #home/exedir/run.sh  on the server
 Route::get('/run/task/rm/log',[ServerTaskController::class,'rm_log']);
 Route::get('/run/task/ping/{ip}',function ($ip,ServerTaskController $serverTaskController){
     return $serverTaskController->ping_ip($ip);
