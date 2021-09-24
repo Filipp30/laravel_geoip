@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 //Nginx: Save Ip address when visiting th web-site.
 Route::get('/ip/run/{ip}',function ($ip){
     HandleIpJob::dispatch($ip);
+    return response(['message'=>'save ip job called','ip'=>$ip]);
 });
 
 
