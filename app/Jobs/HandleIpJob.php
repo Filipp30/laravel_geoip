@@ -12,38 +12,17 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Throwable;
 
-class GetGeoIp2Job implements ShouldQueue{
+class HandleIpJob implements ShouldQueue
+{
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * The number of times the job may be attempted.
-     *
-     * @var int
-     */
-    public $tries = 1;
-
-    /**
-     * The maximum number of unhandled exceptions to allow before failing.
-     *
-     * @var int
-     */
-    public $maxExceptions = 1;
-
-    /**
-     * The number of seconds the job can run before timing out.
-     *
-     * @var int
-     */
-    public $timeout = 15;
-
-    /**
-     * Indicate if the job should be marked as failed on timeout.
-     *
-     * @var bool
-     */
     public $failOnTimeout = true;
 
+    public $tries = 1;
 
+    public $maxExceptions = 1;
+
+    public $timeout = 15;
 
     protected $ip;
 
@@ -51,7 +30,7 @@ class GetGeoIp2Job implements ShouldQueue{
         $this->ip = $ip;
     }
 
-    public function handle( GeoIp2Controller $geoIp2Controller){
+    public function handle(GeoIp2Controller $geoIp2Controller){
         $geoIp2Controller->handle($this->ip);
     }
 
