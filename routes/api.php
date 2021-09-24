@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Storage\StorageController;
 use App\Http\Controllers\VpsServer\ServerTaskController;
 use App\Jobs\HandleIpJob;
@@ -9,7 +10,7 @@ use Illuminate\Support\Facades\Route;
 //Nginx: Save Ip address when visiting th web-site.
 Route::get('/ip/run/{ip}',function ($ip){
     HandleIpJob::dispatch($ip);
-    return response(['message'=>'save ip job called','ip'=>$ip]);
+    return response(['ip'=>$ip],201);
 });
 
 
@@ -32,3 +33,7 @@ Route::get('/run/task/rm/log',[ServerTaskController::class,'rm_log']);
 Route::get('/run/task/ping/{ip}',function ($ip,ServerTaskController $serverTaskController){
     return $serverTaskController->ping_ip($ip);
 });
+
+
+//AUTH: Authentication and Authorization routes.
+Route::post('/auth/registration',[RegistrationController::class,'registration']);
