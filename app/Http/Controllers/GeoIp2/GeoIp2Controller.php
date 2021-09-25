@@ -24,14 +24,13 @@ class GeoIp2Controller extends Controller{
         }
 
         //### If IP existing in the DB then the table:visiting_count will be updated. ###
-        GeoIp::query()
-        ->where('visitor_ip_address','=',$ip)
+        GeoIp::where('visitor_ip_address','=',$ip)
         ->update(['visiting_count'=>DB::raw('visiting_count+1')]);
     }
 
 
     public function saveGeoDataVisitor($data,$ip){
-        GeoIp::query()->create([
+        GeoIp::create([
             'visitor_ip_address'=>$ip,
             'visiting_count'=>1,
             'continent_geo_id'=>$data['continent']['geo_id'],
