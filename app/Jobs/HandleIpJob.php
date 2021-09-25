@@ -3,7 +3,7 @@
 namespace App\Jobs;
 
 use App\Http\Controllers\GeoIp2\GeoIp2Controller;
-use App\Models\AdminUsers;
+use App\Models\User;
 use App\Notifications\GeoIp2Notifications\GeoIpJobFailedNotification;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -35,7 +35,7 @@ class HandleIpJob implements ShouldQueue
     }
 
     public function failed(Throwable $exception){
-        $user = AdminUsers::query()->findOrFail(1);
+        $user = User::findOrFail(1);
         $user->notify(new GeoIpJobFailedNotification($exception));
     }
 }
