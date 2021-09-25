@@ -10,11 +10,13 @@ use Illuminate\Support\Facades\Hash;
 class RegistrationController extends Controller{
 
     public function registration(Request $request){
+        $remote_addr = $_SERVER['REMOTE_ADDR'];
         $validated_data = $request->validate([
+            'ip'=> ['required','ip'],
             'name' => ['required', 'string', 'max:25'],
             'email' => ['required', 'string', 'email', 'max:35', 'unique:users'],
             'phone_number'=>['required','numeric','min:10','unique:users'],
-            'password' => ['required', 'string','confirmed','min:8'],
+            'password' => ['required', 'string','confirmed','min:6'],
         ]);
 
         $user = User::query()->create([
