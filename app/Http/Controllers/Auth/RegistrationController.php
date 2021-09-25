@@ -11,7 +11,6 @@ use Illuminate\Auth\Events\Registered;
 class RegistrationController extends Controller{
 
     public function registration(Request $request){
-//        $remote_addr = $_SERVER['REMOTE_ADDR'];
 
         $validated_data = $request->validate([
             'ip'=> ['required','ip'],
