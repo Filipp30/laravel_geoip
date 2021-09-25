@@ -1,10 +1,12 @@
 <?php
 
 use App\Http\Controllers\Auth\EmailVerificationController;
+use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegistrationController;
 use App\Http\Controllers\Storage\StorageController;
 use App\Http\Controllers\VpsServer\ServerTaskController;
 use App\Jobs\HandleIpJob;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
@@ -46,3 +48,10 @@ use Illuminate\Support\Facades\Route;
     Route::get('/email/verification-notification/{id}',[EmailVerificationController::class,'sendEmailVerificationNotification'])
     ->name('verification.send');
 
+
+
+    ### Login Logout ### ---> php artisan passport:client --password
+    Route::post('/login',[LoginController::class,'login'])->middleware(['passport.login']);
+    Route::post('/refresh',[LoginController::class,'refresh']);
+    Route::post('/logout',[LoginController::class,'logout'])->middleware('auth:api');
+    Route::get('/user', function (Request $request) { return $request->user();})->middleware('auth:api');
