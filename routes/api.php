@@ -49,7 +49,6 @@ use Illuminate\Support\Facades\Route;
     ->name('verification.send');
 
 
-
     ### Login Logout ### ---> php artisan passport:client --password
     Route::post('/login',[LoginController::class,'login'])->middleware(['passport.login']);
     Route::post('/refresh',[LoginController::class,'refresh']);

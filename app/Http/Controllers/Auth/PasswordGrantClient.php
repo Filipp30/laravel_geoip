@@ -22,14 +22,13 @@ class PasswordGrantClient{
             'password' => $user_password,
             'scope' => ''
         ]);
-        $response = app()->handle($req);
 
+        $response = app()->handle($req);
         if ($response->getStatusCode() == 401){
             return false;
         }
         return json_decode($response->getContent());
     }
-
 
     public function refreshTokens($refresh_token){
         $req = Request::create('/oauth/token', 'POST',[
@@ -39,12 +38,11 @@ class PasswordGrantClient{
             'client_secret' =>$this->oClient->secret ,
             'scope' => '',
         ]);
-        $response = app()->handle($req);
 
+        $response = app()->handle($req);
         if ($response->getStatusCode() == 401){
             return false;
         }
         return json_decode($response->getContent());
     }
-
 }

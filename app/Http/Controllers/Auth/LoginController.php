@@ -1,12 +1,10 @@
 <?php
 
 namespace App\Http\Controllers\Auth;
-
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Laravel\Passport\RefreshTokenRepository;
 use Laravel\Passport\TokenRepository;
-
 
 class LoginController extends Controller{
 
@@ -19,12 +17,10 @@ class LoginController extends Controller{
                 'response'=>'OAuthClient is invalid.'
             ],401);
         }
-
         return response([
             'tokens'=>$tokens
         ],201);
     }
-
 
     public function refresh(Request $request,PasswordGrantClient $passwordGrantClient){
 
@@ -39,7 +35,6 @@ class LoginController extends Controller{
             'response'=>$new_tokens
         ],201);
     }
-
 
     public function logout(Request $request){
         $access_token_id = $request->user()->token()->id;
@@ -59,6 +54,5 @@ class LoginController extends Controller{
             'message'=>'logout successfully.'
         ],201);
     }
-
 
 }
