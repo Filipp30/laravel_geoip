@@ -11,8 +11,8 @@ class LoginController extends Controller{
 
     public function login(Request $request,PasswordGrantClient $passwordGrantClient){
 
-        #$x_real_ip = $_SERVER['x_real_ip'];
-        #logs()->info('X-REAL-IP = '.$x_real_ip);
+//        $x_real_ip = $_SERVER['x_real_ip'];
+//        logs()->info('X-REAL-IP = '.$x_real_ip);
 
         $tokens = $passwordGrantClient->getAccessTokenAndRefreshToken($request['email'],$request['password']);
 
