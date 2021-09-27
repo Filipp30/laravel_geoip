@@ -19,7 +19,6 @@ class PassportLogin{
     public function handle(Request $request, Closure $next){
 
         $validated = Validator::make($request->all(), [
-            'ip'=> ['required','ip'],
             'email' => ['required','email','max:35',],
             'password' => ['required','string','min:6'],
         ]);
