@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\DB;
 
 class GeoIp2Controller extends Controller{
 
-    public function handle($ip){
+    public function handleIp($ip){
 
         //### If visitor IP not existing in the DB and the data is valid then will be saved. ###
         if (!GeoIp::query()->where('visitor_ip_address','=',$ip)->exists()){
