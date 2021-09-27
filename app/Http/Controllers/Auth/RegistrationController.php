@@ -12,8 +12,9 @@ class RegistrationController extends Controller{
 
     public function registration(Request $request){
 
+        $x_real_ip = $_SERVER['x_real_ip'];
+
         $validated_data = $request->validate([
-            'ip'=> ['required','ip'],
             'name' => ['required', 'string', 'max:25'],
             'email' => ['required', 'string', 'email', 'max:35', 'unique:users'],
             'phone_number'=>['required','numeric','min:10','unique:users'],

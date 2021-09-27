@@ -54,3 +54,5 @@ use Illuminate\Support\Facades\Route;
     Route::post('/refresh',[LoginController::class,'refresh']);
     Route::post('/logout',[LoginController::class,'logout'])->middleware('auth:api');
     Route::get('/user', function (Request $request) { return $request->user();})->middleware('auth:api');
+
+

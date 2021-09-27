@@ -31,7 +31,7 @@ class HandleIpJob implements ShouldQueue
     }
 
     public function handle(GeoIp2Controller $geoIp2Controller){
-        $geoIp2Controller->handle($this->ip);
+        $geoIp2Controller->handleIp($this->ip);
     }
 
     public function failed(Throwable $exception){
