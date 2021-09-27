@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
+use App\Services\IpToUserDataBindService\RelationHandler;
 use Illuminate\Http\Request;
 use Laravel\Passport\RefreshTokenRepository;
 use Laravel\Passport\TokenRepository;
@@ -9,6 +10,12 @@ use Laravel\Passport\TokenRepository;
 class LoginController extends Controller{
 
     public function login(Request $request,PasswordGrantClient $passwordGrantClient){
+
+//        $x_real_ip = $_SERVER['x_real_ip'];
+        $x_real_ip = '213.214.36.34';
+
+        $relation = new RelationHandler($x_real_ip,1);
+        $relation->handleRelation();
 
         $tokens = $passwordGrantClient->getAccessTokenAndRefreshToken($request['email'],$request['password']);
 
