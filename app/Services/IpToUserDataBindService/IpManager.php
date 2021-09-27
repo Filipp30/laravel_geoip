@@ -3,7 +3,6 @@
 
 namespace App\Services\IpToUserDataBindService;
 
-
 use App\Http\Controllers\GeoIp2\GeoIp2Controller;
 use App\Models\GeoIp;
 
@@ -24,7 +23,7 @@ abstract class IpManager implements IpRepositoryInterface {
     }
 
     public function relationExists(): bool{
-        return GeoIp::query()->where('visitor_ip_address','=',$this->ip)
+        return GeoIp::where('visitor_ip_address','=',$this->ip)
         ->whereNotNull('user_id')->exists();
     }
 

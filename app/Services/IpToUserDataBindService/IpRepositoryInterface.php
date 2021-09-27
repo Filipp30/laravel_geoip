@@ -3,10 +3,6 @@
 
 namespace App\Services\IpToUserDataBindService;
 
-
-use App\Http\Controllers\GeoIp2\GeoIp2Controller;
-
-
 interface IpRepositoryInterface{
 
     /**
