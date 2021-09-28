@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\VpsServer;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 

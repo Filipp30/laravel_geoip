@@ -24,9 +24,9 @@ class RegistrationController extends Controller{
 
         event(new Registered($user));
 
-        $headers = getallheaders();
-        $x_real_ip = $headers['X-Real-Ip'];
-        IpRelationJob::dispatch($user->id,$x_real_ip);
+        if (array_key_exists('X-Real-Ip', getallheaders())){
+            IpRelationJob::dispatch($user->id,getallheaders()['X-Real-Ip']);
+        }
 
         return response([
             'message'=>'Registration successfully.',
