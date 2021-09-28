@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Auth;
+namespace App\Repository\Auth;
 
 use Illuminate\Http\Request;
 use Laravel\Passport\Client as OClient;

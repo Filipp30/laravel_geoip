@@ -1,9 +1,10 @@
 <?php
 
 
-namespace App\Services\IpToUserDataBindService;
+namespace App\Repository\IpRelation;
 
-class RelationHandler extends IpManager {
+
+class IpRelationHandler extends IpManager {
 
     public function __construct($ip, $user_id){
         parent::__construct($ip, $user_id);

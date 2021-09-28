@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Services\IpToUserDataBindService;
+namespace App\Repository\IpRelation;
 
 interface IpRepositoryInterface{
 
