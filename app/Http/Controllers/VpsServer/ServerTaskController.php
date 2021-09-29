@@ -30,4 +30,18 @@ class ServerTaskController extends Controller
             'status'=>$status
         ],201);
     }
+
+    public function create_database(){
+
+        $process = new Process(['/home/exedir/mysql/create_database.sh']);
+        $process->run();
+        $process_output = $process->getOutput();
+
+        return response([
+            "shell-command"=>"create new database",
+            "response"=>$process_output
+        ],201);
+    }
+
+
 }
