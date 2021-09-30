@@ -8,7 +8,7 @@ use Symfony\Component\Process\Process;
 
 class SqlManager implements DatabaseRepositoryInterface {
 
-    public function databaseExists($database_name): bool
+    public function databaseExists($database_name)
     {
         $process = new Process(['/home/exedir/mysql_tasks/db_exists.sh',$database_name]);
         $process->run();
@@ -16,10 +16,10 @@ class SqlManager implements DatabaseRepositoryInterface {
         $isSuccessful = $process->isSuccessful();
         $error = $process->getErrorOutput();
 
-        return boolval($process->getOutput());
+        return $process->getOutput();
     }
 
-    public function userExists($user_name): bool
+    public function userExists($user_name)
     {
         $process = new Process(['/home/exedir/mysql_tasks/user_exists.sh',$user_name]);
         $process->run();
@@ -27,7 +27,7 @@ class SqlManager implements DatabaseRepositoryInterface {
         $isSuccessful = $process->isSuccessful();
         $error = $process->getErrorOutput();
 
-        return boolval($process->getOutput());
+        return $process->getOutput();
     }
 
     public function create()
