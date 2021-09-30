@@ -31,9 +31,9 @@ class AuthServiceProvider extends ServiceProvider
         if (! $this->app->routesAreCached()) {
             Passport::routes();
 
-            Passport::tokensExpireIn(now()->addDays(1));
-            Passport::refreshTokensExpireIn(now()->addDays(1));
-            Passport::personalAccessTokensExpireIn(now()->addMonths(1));
+            Passport::tokensExpireIn(now()->addHour());
+            Passport::refreshTokensExpireIn(now()->addHours(3));
+            Passport::personalAccessTokensExpireIn(now()->addHours(5));
         }
 
         VerifyEmail::toMailUsing(function ($notifiable, $url) {
