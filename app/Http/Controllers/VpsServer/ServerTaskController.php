@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\VpsServer;
 
 use App\Http\Controllers\Controller;
+use App\Repository\CreateDatabase\SqlManager;
+use Illuminate\Http\Request;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
@@ -31,15 +33,16 @@ class ServerTaskController extends Controller
         ],201);
     }
 
-    public function create_database(){
+    public function create_database(Request $request, SqlManager $sqlManager){
 
-        $process = new Process(['/home/exedir/mysql/create_database.sh']);
-        $process->run();
-        $process_output = $process->getOutput();
+        $db_name = $request['db_name'];
+        $user_name = $request['user_name'];
+
 
         return response([
             "shell-command"=>"create new database",
-            "response"=>$process_output
+            "db_exists"=>$sqlManager->databaseExists($db_name),
+            "user_exists"=>$sqlManager->userExists($user_name)
         ],201);
     }
 

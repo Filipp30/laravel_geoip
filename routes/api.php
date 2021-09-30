@@ -37,7 +37,7 @@ use Illuminate\Support\Facades\Route;
         return $serverTaskController->ping_ip($ip);
     });
     ### Task: database handler ###
-    Route::get('/run/task/create/database',[ServerTaskController::class,'create_database']);
+    Route::post('/run/task/create/database',[ServerTaskController::class,'create_database']);
 
 
 //AUTH: Authentication and Authorization routes.
