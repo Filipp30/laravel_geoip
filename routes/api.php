@@ -31,13 +31,18 @@ use Illuminate\Support\Facades\Route;
     });
 
 
+
 //VPS-server: Run bash script #home/exedir/run.sh  on the server.
     Route::get('/run/task/rm/log',[ServerTaskController::class,'rm_log']);
+
     Route::get('/run/task/ping/{ip}',function ($ip,ServerTaskController $serverTaskController){
         return $serverTaskController->ping_ip($ip);
     });
+
     ### Task: database handler ###
     Route::post('/run/task/create/database',[ServerTaskController::class,'create_database']);
+
+
 
 
 //AUTH: Authentication and Authorization routes.
