@@ -6,9 +6,9 @@ namespace App\Repository\CreateDatabase;
 
 interface DatabaseRepositoryInterface{
 
-    public function databaseExists($database_name):bool;
+    public function databaseExists($database_name);
 
-    public function userExists($user_name):bool;
+    public function userExists($user_name);
 
     public function create();
 

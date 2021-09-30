@@ -37,12 +37,19 @@ class ServerTaskController extends Controller
 
         $db_name = $request['db_name'];
         $user_name = $request['user_name'];
-
+        $process = new Process(['/home/exedir/mysql_tasks/db_exists.sh',$db_name]);
+        $process->run();
 
         return response([
             "shell-command"=>"create new database",
-            "db_exists"=>$sqlManager->databaseExists($db_name),
-            "user_exists"=>$sqlManager->userExists($user_name)
+//            "db_exists"=>$sqlManager->databaseExists($db_name),
+//            "user_exists"=>$sqlManager->userExists($user_name)
+            'test1'=> $process->getCommandLine(),
+            'test2'=> $process->getExitCodeText(),
+            'test3'=> $process->getInput(),
+            'test4'=> $process->isSuccessful(),
+            'test5'=> $process->getOutput(),
+            'test6'=> $process->getStatus()
         ],201);
     }
 
