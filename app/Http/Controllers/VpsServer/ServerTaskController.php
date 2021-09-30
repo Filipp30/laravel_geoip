@@ -11,12 +11,14 @@ use Symfony\Component\Process\Process;
 class ServerTaskController extends Controller
 {
     public function rm_log(){
-        $process = new Process(['/home/exedir/run.sh']);
+        $process = new Process(['/home/exedir/rm_log_files.sh']);
         $process->run();
         $process_status = $process->getOutput();
 
         if (!$process->isSuccessful()) {
-            throw new ProcessFailedException($process);
+            return response([
+                'error'=>$process->getErrorOutput()
+            ],201);
         }
         return response([
             "shell-command"=>"cleanLogFiles",
@@ -34,22 +36,13 @@ class ServerTaskController extends Controller
     }
 
     public function create_database(Request $request, SqlManager $sqlManager){
-
         $db_name = $request['db_name'];
         $user_name = $request['user_name'];
-        $process = new Process(['/home/exedir/mysql_tasks/db_exists.sh',$db_name]);
-        $process->run();
 
         return response([
-            "shell-command"=>"create new database",
-//            "db_exists"=>$sqlManager->databaseExists($db_name),
-//            "user_exists"=>$sqlManager->userExists($user_name)
-            'test1'=> $process->getCommandLine(),
-            'test2'=> $process->getExitCodeText(),
-            'test3'=> $process->getInput(),
-            'test4'=> $process->isSuccessful(),
-            'test5'=> $process->getOutput(),
-            'test6'=> $process->getStatus()
+            "shell_command"=>"check if db && user exists",
+            "db_exists"=>$sqlManager->databaseExists($db_name),
+            "user_exists"=>$sqlManager->userExists($user_name)
         ],201);
     }
 
