@@ -10,6 +10,6 @@ interface DatabaseRepositoryInterface{
 
     public function userExists($user_name):bool;
 
-    public function create();
+    public function create($db_name,$user_name,$password);
 
 }

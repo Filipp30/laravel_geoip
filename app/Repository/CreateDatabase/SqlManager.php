@@ -30,8 +30,14 @@ class SqlManager implements DatabaseRepositoryInterface {
         return boolval($process->getOutput());
     }
 
-    public function create()
+    public function create($db_name,$user_name,$password)
     {
-        // TODO: Implement create() method.
+        $process = new Process(['/home/exedir/mysql_tasks/create.sh',$db_name,$user_name,$password]);
+        $process->run();
+        return response([
+            'command'=>$process->getCommandLine(),
+            'isSuccessful'=>$process->isSuccessful(),
+            'error'=>$process->getErrorOutput()
+        ],201);
     }
 }

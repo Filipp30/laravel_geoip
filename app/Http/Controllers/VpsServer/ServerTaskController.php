@@ -38,13 +38,18 @@ class ServerTaskController extends Controller
     public function create_database(Request $request, SqlManager $sqlManager){
         $db_name = $request['db_name'];
         $user_name = $request['user_name'];
+        $password = $request['password'];
 
-        return response([
-            "shell_command"=>"check if db && user exists",
-            "db_exists"=>$sqlManager->databaseExists($db_name),
-            "user_exists"=>$sqlManager->userExists($user_name)
-        ],201);
+        $db_exist = $sqlManager->databaseExists($db_name);
+        $user_exist = $sqlManager->userExists($user_name);
+
+        if ($db_exist || $user_exist){
+            return response([
+                "shell_command"=>"check if db && user exists",
+                "db_exists"=>$sqlManager->databaseExists($db_name),
+                "user_exists"=>$sqlManager->userExists($user_name)
+            ],201);
+        }
+        return $sqlManager->create($db_name,$user_name,$password);
     }
-
-
 }
