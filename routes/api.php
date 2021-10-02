@@ -3,6 +3,7 @@
 use App\Http\Controllers\Auth\EmailVerificationController;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\Auth\RegistrationController;
+use App\Http\Controllers\Redis\RedisController;
 use App\Http\Controllers\Storage\StorageController;
 use App\Http\Controllers\VpsServer\ServerTaskController;
 use App\Jobs\HandleIpJob;
@@ -63,3 +64,5 @@ use Illuminate\Support\Facades\Route;
     Route::get('/user', function (Request $request) { return $request->user();})->middleware('auth:api');
 
 
+//REDIS: Redis testing controller.
+    Route::get('/redis/run',[RedisController::class,'run']);
