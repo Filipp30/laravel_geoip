@@ -17,10 +17,19 @@
         <style>
             body {
                 font-family: 'Nunito', sans-serif;
+                margin-left: 100px;
             }
         </style>
     </head>
     <body class="antialiased">
-        <h1>Geo Ip run</h1>
+        <h1>Laravel Rest-Api : 8000</h1>
+        <h2>Testing modus : </h2>
+        <h3>--- bash scripts , geoIp-location , queue-jobs , Nginx-server , Proxy-Reverse-Server , SFTP-server , Mysql-server , Redis-server ---</h3>
+        <h5>
+            <span>/phpmyadmin</span><br><br>
+            <span>/horizon</span>
+        </h5>
+        <p>Author : Grigoruk Filipp</p>
+        <p>email : filipp-tts@outlook.com</p>
     </body>
 </html>
