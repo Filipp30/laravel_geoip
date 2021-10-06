@@ -21,7 +21,7 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
         // Horizon::routeMailNotificationsTo('example@example.com');
         // Horizon::routeSlackNotificationsTo('slack-webhook-url', '#channel');
 
-        // Horizon::night();
+         Horizon::night();
     }
 
     /**
@@ -37,6 +37,17 @@ class HorizonServiceProvider extends HorizonApplicationServiceProvider
             return in_array($user->email, [
                 //
             ]);
+        });
+    }
+
+    protected function authorization()
+    {
+        Horizon::auth(function ($request) {
+
+            if ($_SERVER['REMOTE_ADDR'] == '127.0.0.1' || '192.168.1.2'){
+                return true;
+            }
+            return false;
         });
     }
 }
