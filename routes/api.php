@@ -10,11 +10,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 
-//Nginx: Save Ip address when visiting th web-site.
-    Route::get('/ip/run/{ip}',function ($ip){
-        HandleIpJob::dispatch($ip);
-        return response(['ip'=>$ip],201);
-    });
+//Request from Nginx: Save Ip address from making request.
+    Route::get('/ip/run/{ip}',function ($ip){ HandleIpJob::dispatch($ip); return response([],200); });
 
 
 //SFTP: Storage Routes # SFTP server created on the VPS server.

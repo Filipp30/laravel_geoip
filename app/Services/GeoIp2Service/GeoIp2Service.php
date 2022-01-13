@@ -9,7 +9,7 @@ use Throwable;
 
 class GeoIp2Service implements GeoLocationContract {
 
-    public function get_location($ip)
+    public function get_location($ip): bool|array
     {
         try {
             $client = new Client(config('services.geo_ip_2.accountId'), config('services.geo_ip_2.licenseKey'), ['en'], ['host' => 'geolite.info']);
