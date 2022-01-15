@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Repository\IpRelation\IpRelationHandler;
+use App\Repository\Services\IpRelation\IpRelationHandler;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;

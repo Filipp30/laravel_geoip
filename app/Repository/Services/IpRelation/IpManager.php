@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Repository\IpRelation;
+namespace App\Repository\Services\IpRelation;
 
 use App\Http\Controllers\GeoIp2\GeoIp2Controller;
 use App\Models\GeoIp;

@@ -1,9 +1,10 @@
 <?php
 
-namespace App\Repository\Auth;
+namespace App\Repository\Services\Auth;
 
 use Illuminate\Http\Request;
 use Laravel\Passport\Client as OClient;
+use function app;
 
 class PasswordGrantClient{
 

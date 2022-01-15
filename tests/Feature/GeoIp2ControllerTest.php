@@ -2,9 +2,9 @@
 
 namespace Tests\Feature;
 
+use App\ExternalServices\Contracts\GeoLocationContract;
 use App\Http\Controllers\GeoIp2\GeoIp2Controller;
 use App\Models\GeoIp;
-use App\Services\Contracts\GeoLocationContract;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 

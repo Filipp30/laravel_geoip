@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Repository\IpRelation;
+namespace App\Repository\Services\IpRelation;
 
 interface IpRepositoryInterface{
 

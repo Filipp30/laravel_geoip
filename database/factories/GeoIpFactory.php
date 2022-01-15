@@ -30,7 +30,7 @@ class GeoIpFactory extends Factory
             'country_is_in_european_union' => $this->faker->boolean(),
             'city_geo_id' => $this->faker->numerify('#######'),
             'city_geo_name' => $this->faker->city(),
-            'postal_code' => $this->faker->postcode(),
+            'postal_code' => 1111,
             'province' => $this->faker->city(),
             'accuracy_radius' => $this->faker->numerify('##'),
             'latitude' => $this->faker->latitude(),

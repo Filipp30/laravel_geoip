@@ -15,7 +15,7 @@ class CreateGeoIpTable extends Migration
     {
         Schema::create('geo_ip', function (Blueprint $table) {
             $table->id();
-            $table->ipAddress('visitor_ip_address');
+            $table->ipAddress('visitor_ip_address')->unique();
             $table->char('autonomous_network')->nullable(true);
             $table->integer('user_id')->nullable(true);
             $table->integer('visiting_count');

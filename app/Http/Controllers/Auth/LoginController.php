@@ -5,7 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Jobs\IpRelationJob;
 use App\Models\User;
-use App\Repository\Auth\PasswordGrantClient;
+use App\Repository\Services\Auth\PasswordGrantClient;
 use Illuminate\Http\Request;
 use Laravel\Passport\RefreshTokenRepository;
 use Laravel\Passport\TokenRepository;

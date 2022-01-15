@@ -3,9 +3,8 @@
 namespace App\Http\Controllers\VpsServer;
 
 use App\Http\Controllers\Controller;
-use App\Repository\CreateDatabase\SqlManager;
+use App\Repository\Services\CreateDatabase\SqlManager;
 use Illuminate\Http\Request;
-use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 
 class ServerTaskController extends Controller

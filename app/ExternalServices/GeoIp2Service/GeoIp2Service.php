@@ -1,9 +1,9 @@
 <?php
 
 
-namespace App\Services\GeoIp2Service;
+namespace App\ExternalServices\GeoIp2Service;
 
-use App\Services\Contracts\GeoLocationContract;
+use App\ExternalServices\Contracts\GeoLocationContract;
 use GeoIp2\WebService\Client;
 use Throwable;
 
