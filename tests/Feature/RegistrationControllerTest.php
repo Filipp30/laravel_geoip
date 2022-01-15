@@ -13,6 +13,18 @@ class RegistrationControllerTest extends TestCase
 {
     use RefreshDatabase;
 
+    public function test_registration_unique_email(){
+        $newUser = User::factory()->create();
+        $response = $this->post('/api/auth/registration',[
+            'name' => $newUser->name,
+            'email' => $newUser->email,
+            'phone_number' => $newUser->phone_number,
+            'password' => '12345678',
+            'password_confirmation' => '12345678',
+        ]);
+        $response->assertStatus(302);
+    }
+
      public function test_user_registration(){
          $response = $this->post('/api/auth/registration',[
              'name' => 'Test User',
@@ -25,7 +37,6 @@ class RegistrationControllerTest extends TestCase
      }
 
      public function test_relate_ip_address_to_user( ){
-
          $responseIp = $this->get('/api/ip/run/81.11.139.169');
          $responseIp->assertStatus(200);
 
@@ -48,4 +59,6 @@ class RegistrationControllerTest extends TestCase
 
          $this->assertTrue($userId[0]['id'] == $geoIpRelationId[0]['user_id']);
      }
+
+
 }

@@ -14,7 +14,7 @@ class EmailVerificationController extends Controller{
         return response([
             'message'=>'Email is verified successfully.',
             'verified'=>$email_is_verified
-        ],201);
+        ],200);
     }
 
     public function sendEmailVerificationNotification(Request $request){
@@ -22,6 +22,6 @@ class EmailVerificationController extends Controller{
         $user->sendEmailVerificationNotification();
         return response([
             'message'=>'Verification email send.',
-        ],201);
+        ],200);
     }
 }
