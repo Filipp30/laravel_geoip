@@ -2,12 +2,13 @@
 
 namespace App\Repository\Models;
 
-class UserRegistrationModel{
+class UserRegistrationModel
+{
 
-    private String $name;
-    private String $email;
-    private String $phoneNumber;
-    private String $password;
+    private string $name;
+    private string $email;
+    private string $phoneNumber;
+    private string $password;
 
     /**
      * @param String $name
@@ -54,7 +55,4 @@ class UserRegistrationModel{
     {
         return $this->password;
     }
-
-
-
 }

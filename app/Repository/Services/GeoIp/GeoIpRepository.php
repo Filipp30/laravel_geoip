@@ -4,9 +4,11 @@ namespace App\Repository\Services\GeoIp;
 
 use App\Models\GeoIp;
 
-class GeoIpRepository{
+class GeoIpRepository
+{
 
-    static public function saveGeoDataVisitor($data,$ip){
+    static public function saveGeoDataVisitor($data, $ip)
+    {
         GeoIp::create([
             'visitor_ip_address' => $ip,
             'visiting_count' => 1,

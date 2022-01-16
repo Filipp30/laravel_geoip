@@ -3,47 +3,50 @@
 namespace Tests\Feature;
 
 use App\Models\User;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Auth\Events\Verified;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
+use Tests\CreatesApplication;
 use Tests\TestCase;
 
 class EmailVerificationTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_email_verification_notification(){
-        $user = User::factory()->unverified()->create();
-        $response = $this->get('/api/email/verification-notification/'.$user->id);
+    private $user;
+
+    protected function setUp(): void
+    {
+        parent::setUp();
+        $this->user = User::factory()->unverified()->create();
+    }
+
+    public function test_email_verification_notification()
+    {
+
+        $response = $this->get('/api/email/verification-notification/' . $this->user->id);
         $response->assertStatus(200);
     }
 
-    public function test_email_verify(){
-        $user = User::factory()->unverified()->create();
-
+    public function test_email_verify()
+    {
         $verificationUrl = URL::temporarySignedRoute(
             'verification.verify',
             now()->addMinutes(60),
-            ['id' => $user->id, 'hash' => sha1($user->email)]
+            ['id' => $this->user->id, 'hash' => sha1($this->user->email)]
         );
-        $response = $this->actingAs($user)->get($verificationUrl);
+        $response = $this->actingAs($this->user)->get($verificationUrl);
         $response->assertStatus(200);
-        $this->assertTrue($user->fresh()->hasVerifiedEmail());
+        $this->assertTrue($this->user->fresh()->hasVerifiedEmail());
     }
 
-    public function test_email_is_not_verified_with_invalid_hash(){
-        $user = User::factory()->unverified()->create();
-
+    public function test_email_is_not_verified_with_invalid_hash()
+    {
         $verificationUrl = URL::temporarySignedRoute(
             'verification.verify',
             now()->addMinutes(60),
-            ['id' => $user->id, 'hash' => sha1('wrong-email')]
+            ['id' => $this->user->id, 'hash' => sha1('wrong-email')]
         );
-        $this->actingAs($user)->get($verificationUrl);
-        $this->assertFalse($user->fresh()->hasVerifiedEmail());
+        $this->actingAs($this->user)->get($verificationUrl);
+        $this->assertFalse($this->user->fresh()->hasVerifiedEmail());
     }
-
-
 }

@@ -3,7 +3,8 @@
 
 namespace App\Repository\Services\IpRelation;
 
-interface IpRepositoryInterface{
+interface IpRepositoryInterface
+{
 
     /**
      * Determine if a ip address record exists in to database.

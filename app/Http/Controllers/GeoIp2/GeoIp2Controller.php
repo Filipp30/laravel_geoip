@@ -9,20 +9,25 @@ use App\Repository\Services\GeoIp\GeoIpRepository;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
-class GeoIp2Controller extends Controller{
+class GeoIp2Controller extends Controller
+{
 
     public function handleIp($ip): bool
     {
         //### Validate ip address, ###
-        $ipIsValid = Validator::make(['visitor_ip_address' => $ip],['visitor_ip_address' => 'required|ip']);
-        if ($ipIsValid->fails()){
+        $ipIsValid = Validator::make(['visitor_ip_address' => $ip], ['visitor_ip_address' => 'required|ip']);
+        if ($ipIsValid->fails()) {
+
             return false;
         }
 
         //### If visitor IP not existing in the DB and the data is valid then will be saved. ###
-        if (!GeoIp::query()->where('visitor_ip_address','=',$ip)->exists()){
+        if (!GeoIp::query()->where('visitor_ip_address', '=', $ip)->exists()) {
             $geo_ip_data = app(GeoLocationContract::class)->get_location($ip);
-            if ($geo_ip_data){ GeoIpRepository::saveGeoDataVisitor($geo_ip_data,$ip); return true;}
+            if ($geo_ip_data) {
+                GeoIpRepository::saveGeoDataVisitor($geo_ip_data, $ip);
+                return true;
+            }
 
             // ### Ip address is not from private network. ###
             $this->ip_not_valid($ip);
@@ -31,12 +36,14 @@ class GeoIp2Controller extends Controller{
         }
 
         //### If IP existing in the DB then the table:visiting_count will be updated. ###
-        GeoIp::where('visitor_ip_address','=',$ip)
-        ->update(['visiting_count'=>DB::raw('visiting_count+1')]);
+        GeoIp::query()->where('visitor_ip_address', '=', $ip)
+            ->update(['visiting_count' => DB::raw('visiting_count+1')]);
+
         return true;
     }
 
-    public function ip_not_valid($ip){
+    public function ip_not_valid($ip)
+    {
 
     }
 }

@@ -1,16 +1,16 @@
 <?php
 
-
 namespace App\Repository\Services\Auth;
-
 
 use App\Models\User;
 use App\Repository\Models\UserRegistrationModel;
 use Illuminate\Support\Facades\Hash;
 
-class UserRepository{
+class UserRepository
+{
 
-    static public function createUser(UserRegistrationModel $user){
+    static public function createUser(UserRegistrationModel $user)
+    {
         return User::create([
             'name' => $user->getName(),
             'email' => $user->getEmail(),
@@ -18,9 +18,4 @@ class UserRepository{
             'password' => Hash::make($user->getPassword()),
         ]);
     }
-
-    public function createIpRelation($ip, $id){
-        // TODO: Implement createIpRelation() method.
-    }
-
 }
