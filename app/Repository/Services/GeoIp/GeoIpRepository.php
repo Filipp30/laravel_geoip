@@ -3,6 +3,7 @@
 namespace App\Repository\Services\GeoIp;
 
 use App\Models\GeoIp;
+use Illuminate\Support\Facades\DB;
 
 class GeoIpRepository
 {
@@ -32,5 +33,16 @@ class GeoIpRepository
             'autonomous_network' => $data['autonomous_network'],
             'is_hosting_provider' => $data['is_hosting_provider'],
         ]);
+    }
+
+    static public function visitorIpAddressExists($ip): bool
+    {
+        return GeoIp::query()->where('visitor_ip_address', '=', $ip)->exists();
+    }
+
+    static public function incrementVisitingCount($ip)
+    {
+        GeoIp::query()->where('visitor_ip_address', '=', $ip)
+            ->update(['visiting_count' => DB::raw('visiting_count+1')]);
     }
 }
