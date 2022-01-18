@@ -4,10 +4,12 @@
 namespace App\Repository\Services\IpRelation;
 
 
+use JetBrains\PhpStorm\Pure;
+
 class IpRelationHandler extends IpManager
 {
 
-    public function __construct($ip, $user_id)
+    #[Pure] public function __construct($ip, $user_id)
     {
         parent::__construct($ip, $user_id);
     }

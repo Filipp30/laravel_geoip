@@ -12,22 +12,26 @@ class GeoIpJobFailedNotification extends Notification
 
     public $exception;
 
-    public function __construct($exception){
+    public function __construct($exception)
+    {
         $this->exception = $exception;
     }
 
-    public function via($notifiable){
-        return ['mail','database'];
+    public function via($notifiable)
+    {
+        return ['mail', 'database'];
     }
 
-    public function toMail($notifiable){
+    public function toMail($notifiable)
+    {
         return (new MailMessage)
-        ->greeting('Geo Ip2 Job Failed!')
-        ->line('Exception :')
-        ->line($this->exception);
+            ->greeting('Geo Ip2 Job Failed!')
+            ->line('Exception :')
+            ->line($this->exception);
     }
 
-    public function toArray($notifiable){
+    public function toArray($notifiable)
+    {
         return [
             //
         ];

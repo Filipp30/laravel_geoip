@@ -4,6 +4,9 @@
 namespace App\Repository\Services\CreateDatabase;
 
 
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\Response;
 use Symfony\Component\Process\Process;
 use function response;
 
@@ -31,7 +34,7 @@ class SqlManager implements DatabaseRepositoryInterface {
         return boolval($process->getOutput());
     }
 
-    public function create($db_name,$user_name,$password)
+    public function create($db_name,$user_name,$password): Response|Application|ResponseFactory
     {
         $process = new Process(['/home/exedir/mysql_tasks/create.sh',$db_name,$user_name,$password]);
         $process->run();

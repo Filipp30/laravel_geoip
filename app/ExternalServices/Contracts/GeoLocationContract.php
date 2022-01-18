@@ -3,5 +3,5 @@ namespace App\ExternalServices\Contracts;
 
 interface  GeoLocationContract{
 
-    public function get_location($ip);
+    public function getLocation($ip);
 }

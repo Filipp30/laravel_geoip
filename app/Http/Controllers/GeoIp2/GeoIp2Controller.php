@@ -17,7 +17,7 @@ class GeoIp2Controller extends Controller
 
         //### If visitor IP not existing in the DB and the data is valid then will be saved. ###
         if (!GeoIpRepository::visitorIpAddressExists($ip)) {
-            $geo_ip_data = app(GeoLocationContract::class)->get_location($ip);
+            $geo_ip_data = app(GeoLocationContract::class)->getLocation($ip);
             if ($geo_ip_data) {
                 GeoIpRepository::saveGeoDataVisitor($geo_ip_data, $ip);
                 return true;
