@@ -2,12 +2,13 @@
 
 namespace App\Jobs;
 
-use App\Repository\IpRelation\IpRelationHandler;
+use App\Repository\Services\IpRelation\IpRelationHandler;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
+use JetBrains\PhpStorm\Pure;
 
 class IpRelationJob implements ShouldQueue
 {
@@ -15,9 +16,9 @@ class IpRelationJob implements ShouldQueue
 
     protected $id;
     protected $ip;
-    protected $ipRelationHandler;
+    protected IpRelationHandler $ipRelationHandler;
 
-    public function __construct($id,$ip)
+    #[Pure] public function __construct($id, $ip)
     {
         $this->id = $id;
         $this->ip = $ip;

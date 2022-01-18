@@ -3,14 +3,17 @@
 namespace App\Http\Controllers\VpsServer;
 
 use App\Http\Controllers\Controller;
-use App\Repository\CreateDatabase\SqlManager;
+use App\Repository\Services\CreateDatabase\SqlManager;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
 use Illuminate\Http\Request;
-use Symfony\Component\Process\Exception\ProcessFailedException;
+use Illuminate\Http\Response;
 use Symfony\Component\Process\Process;
 
 class ServerTaskController extends Controller
 {
-    public function rm_log(){
+    public function rm_log(): Response|Application|ResponseFactory
+    {
         $process = new Process(['/home/exedir/rm_log_files.sh']);
         $process->run();
         $process_status = $process->getOutput();
@@ -26,7 +29,8 @@ class ServerTaskController extends Controller
         ],201);
     }
 
-    public function ping_ip($ip){
+    public function ping_ip($ip): Response|Application|ResponseFactory
+    {
         $ping_result = exec('ping -c1 '.$ip,$outcome,$status);
         return response([
             'ping_result'=>$ping_result,
@@ -35,7 +39,8 @@ class ServerTaskController extends Controller
         ],201);
     }
 
-    public function create_database(Request $request, SqlManager $sqlManager){
+    public function create_database(Request $request, SqlManager $sqlManager): Response|Application|ResponseFactory
+    {
         $db_name = $request['db_name'];
         $user_name = $request['user_name'];
         $password = $request['password'];

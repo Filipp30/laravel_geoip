@@ -1,7 +1,7 @@
 <?php
 
 
-namespace App\Repository\CreateDatabase;
+namespace App\Repository\Services\CreateDatabase;
 
 
 interface DatabaseRepositoryInterface{

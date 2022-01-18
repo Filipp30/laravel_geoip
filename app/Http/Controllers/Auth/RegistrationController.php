@@ -3,37 +3,37 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\RegistrationRequest;
 use App\Jobs\IpRelationJob;
-use App\Repository\Auth\UserRegistration;
-use Illuminate\Http\Request;
+use App\Repository\Models\UserRegistrationModel;
+use App\Repository\Services\Auth\UserRepository;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Contracts\Foundation\Application;
+use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\Response;
 
-class RegistrationController extends Controller{
+class RegistrationController extends Controller
+{
+    public function registration(RegistrationRequest $request): Response|Application|ResponseFactory
+    {
+        $validated = $request->validated();
 
-    public function registration(Request $request,UserRegistration $userRegistration){
+        if ($validated) {
+            $user = new UserRegistrationModel($validated['name'], $validated['email'], $validated['phone_number'], $validated['password']);
+            $user = UserRepository::createUser($user);
+            event(new Registered($user));
+        }
 
-        $validated = $request->validate([
-            'name' => ['required', 'string', 'max:25'],
-            'email' => ['required', 'string', 'email', 'max:35', 'unique:users'],
-            'phone_number'=>['required','numeric','min:10','unique:users'],
-            'password' => ['required', 'string','confirmed','min:6'],
-        ]);
-
-        $user = $userRegistration->createUser($validated['name'],
-        $validated['email'],$validated['phone_number'],$validated['password']);
-
-        event(new Registered($user));
-
-        if (array_key_exists('X-Real-Ip', getallheaders())){
-            IpRelationJob::dispatch($user->id,getallheaders()['X-Real-Ip']);
+        // Relate ip address to user.
+        if (array_key_exists('X-Real-Ip', getallheaders())) {
+            IpRelationJob::dispatch($user->id, getallheaders()['X-Real-Ip']);
         }
 
         return response([
-            'message'=>'Registration successfully.',
-            'email'=>'Must verify your email before you can login !',
-            'user_name'=>$user->name,
-            'user-email'=>$user->email
-        ],201);
+            'message' => 'Registration successfully.',
+            'email' => 'Must verify your email before you can login !',
+            'user_name' => $user->name,
+            'user_email' => $user->email,
+        ], 200);
     }
-
 }

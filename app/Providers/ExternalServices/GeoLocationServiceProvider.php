@@ -2,8 +2,9 @@
 
 namespace App\Providers\ExternalServices;
 
-use App\Services\Contracts\GeoLocationContract;
-use App\Services\GeoIp2Service\GeoIp2Service;
+
+use App\ExternalServices\Contracts\GeoLocationContract;
+use App\ExternalServices\GeoIp2Service\GeoIp2Service;
 use Illuminate\Support\ServiceProvider;
 
 class GeoLocationServiceProvider extends ServiceProvider
